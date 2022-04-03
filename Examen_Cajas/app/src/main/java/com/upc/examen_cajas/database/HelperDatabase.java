@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 
 public class HelperDatabase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION=1;
-    private static final String DATABASE_NAME="security.db";
-    private static final String DATABASE_TABLE_USER="user";
+    public static final int DATABASE_VERSION=2;
+    public static final String DATABASE_NAME="security.db";
+    public static final String DATABASE_TABLE_USER="user";
 
     public HelperDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -22,10 +22,10 @@ public class HelperDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " + DATABASE_TABLE_USER + "(" +
                 "user_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "user_name TEXT NOT NULL," +
+                "password TEXT NOT NULL," +
                 "first_name TEXT NOT NULL," +
                 "last_name TEXT NOT NULL," +
                 "document_number TEXT NOT NULL," +
-                "birth_date DATE," +
                 "age INTEGER NOT NULL," +
                 "height DOUBLE NOT NULL)");
     }
