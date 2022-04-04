@@ -1,6 +1,8 @@
 package com.upc.examen_cajas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,20 +14,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.upc.examen_cajas.adapter.UserEntityAdapter;
 import com.upc.examen_cajas.database.HelperDatabase;
+import com.upc.examen_cajas.entity.UserEntity;
+import com.upc.examen_cajas.repository.UserRepository;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createButton;
-
+    //Button createButton;
+    RecyclerView listItemView;
+    ArrayList<UserEntity> userEntities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        createButton = findViewById(R.id.CreateButton);
+        //createButton = findViewById(R.id.CreateButton);
 
-        createButton.setOnClickListener(new View.OnClickListener() {
+        listItemView = findViewById(R.id.listItemView);
+
+        listItemView.setLayoutManager(new LinearLayoutManager(this));
+
+        UserRepository userRepository = new UserRepository(MainActivity.this);
+
+        userEntities = new ArrayList<>();
+
+        UserEntityAdapter adapter = new UserEntityAdapter(userRepository.getUserAll());
+
+        listItemView.setAdapter(adapter);
+
+        /*createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -39,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
