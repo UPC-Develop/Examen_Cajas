@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.upc.examen_cajas.entity.UserEntity;
 import com.upc.examen_cajas.repository.UserRepository;
@@ -41,24 +42,34 @@ public class CreateUserActivity extends AppCompatActivity {
 
                 UserRepository userRepository = new UserRepository(CreateUserActivity.this);
 
-                UserEntity userEntity = new UserEntity();
+                if(!userNameText.getText().toString().equals("") && !passwordText.getText().toString().equals("")
+                        && !firstNameText.getText().toString().equals("") && !lastNameText.getText().toString().equals("")
+                        && !documentNumberText.getText().toString().equals("") && !ageText.getText().toString().equals("")
+                        && !heightText.getText().toString().equals("")){
 
-                userEntity.setUser_name(userNameText.getText().toString());
-                userEntity.setPassword(passwordText.getText().toString());
-                userEntity.setFirst_name(firstNameText.getText().toString());
-                userEntity.setLast_name(lastNameText.getText().toString());
-                userEntity.setDocument_number(documentNumberText.getText().toString());
-                userEntity.setAge(Integer.parseInt(ageText.getText().toString()));
-                userEntity.setHeight(Double.parseDouble(heightText.getText().toString()));
+                    UserEntity userEntity = new UserEntity();
+
+                    userEntity.setUser_name(userNameText.getText().toString());
+                    userEntity.setPassword(passwordText.getText().toString());
+                    userEntity.setFirst_name(firstNameText.getText().toString());
+                    userEntity.setLast_name(lastNameText.getText().toString());
+                    userEntity.setDocument_number(documentNumberText.getText().toString());
+                    userEntity.setAge(Integer.parseInt(ageText.getText().toString()));
+                    userEntity.setHeight(Double.parseDouble(heightText.getText().toString()));
 
 
-                userRepository.createUser(userEntity);
+                    userRepository.createUser(userEntity);
 
-                AlertDialog.Builder message = new AlertDialog.Builder(CreateUserActivity.this);
-                message.setTitle("Informativo");
-                message.setMessage("El usuario se creo correctamente");
-                message.setPositiveButton("Aceptar", null);
-                message.create().show();
+                    AlertDialog.Builder message = new AlertDialog.Builder(CreateUserActivity.this);
+                    message.setTitle("Informativo");
+                    message.setMessage("El usuario se creo correctamente.");
+                    message.setPositiveButton("Aceptar", null);
+                    message.create().show();
+                }else{
+                    Toast.makeText(CreateUserActivity.this, "Debe llenar los campos obligatorios", Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
     }

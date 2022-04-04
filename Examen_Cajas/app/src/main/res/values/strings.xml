@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Examen_Cajas</string>
+    <string name="app_name">Usuarios</string>
     <string name="hint_userName">Correo electrónico</string>
     <string name="hint_password">Contraseña</string>
     <string name="hint_firstName">Nombres</string>
